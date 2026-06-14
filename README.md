@@ -4,8 +4,8 @@ A minimal viable product for an online shopping store built with HTML/CSS/Vanill
 
 ## Features (MVP)
 
-- User authentication (Sign up / Log in)
-- Product catalog browsing
+- User authentication (Sign up / Log in) - **required to place orders**
+- Product catalog browsing with category filtering and sorting
 - Shopping cart with add/remove/update quantity
 - Checkout with delivery cost calculation (using maps)
 - Mock payment processing (Stripe test mode)
@@ -30,6 +30,7 @@ online-shop-mvp/
 ├── config.js.template
 ├── supabase/
 │   └── schema.sql
+├── .gitignore
 └── README.md
 ```
 
@@ -60,7 +61,7 @@ cd online-shop-mvp
        SUPABASE_ANON_KEY: 'your_anon_public_key_here'
    };
    ```
-   **Important:** Never commit `config.js` to GitHub! It's already in `.gitignore` (if not, add it).
+   **Important:** Never commit `config.js` to GitHub! It's already in `.gitignore`.
 
 ### 3. Set up Stripe (for payments)
 1. Create a Stripe account at [stripe.com](https://stripe.com)
@@ -90,9 +91,16 @@ For full functionality with Supabase:
 3. Supabase backend will work automatically with the deployed frontend
    - Make sure `config.js` is **not** deployed (it should be in `.gitignore`)
 
+## Important Notes
+
+- **Schema Location:** The Supabase schema is located at `supabase/schema.sql`. Point your Supabase project to this file to set up the database.
+- **User Authentication:** Users **must sign up** to be able to buy and place orders. Authentication is implemented via Supabase Auth (email/password). This is a next step in development.
+- **Security:** We use Supabase's built-in security features, including Row Level Security (RLS) to protect user data. Always ensure your Supabase project has appropriate security settings.
+- **UI Improvements:** The interface has been updated with a premium feel, using the Poppins font, improved card layout, category filtering, sorting options, and a cohesive color scheme (no neon colors).
+
 ## Next Steps
 
-1. [ ] Implement Supabase auth (email/password sign up/login)
+1. [ ] Implement Supabase auth (email/password sign up/login) - required for checkout
 2. [ ] Add cart persistence (localStorage or Supabase)
 3. [ ] Implement delivery cost calculation using OpenStreetMap Nominatim
 4. [ ] Integrate Stripe test mode for payments
@@ -112,3 +120,7 @@ For full functionality with Supabase:
 - **2026-06-13**: Integrated Supabase JS client and updated script.js to fetch products from Supabase
   - Added config.js.template for environment variables
   - App falls back to mock data if config.js not found
+- **2026-06-13**: Improved UI with premium design, added category filtering and sorting
+  - Updated layout with Poppins font, premium card system, and improved navigation
+  - Implemented category filter and sort options
+  - Enhanced product cards and cart interface

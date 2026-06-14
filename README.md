@@ -27,6 +27,7 @@ online-shop-mvp/
 ├── index.html
 ├── style.css
 ├── script.js
+├── config.js.template
 ├── supabase/
 │   └── schema.sql
 └── README.md
@@ -48,47 +49,58 @@ cd online-shop-mvp
    - Go to your Supabase project dashboard → SQL Editor
    - Copy and paste the contents of `supabase/schema.sql`
    - Click "Run"
-5. Create a `.env` file in the project root:
+5. Create a `config.js` file in the project root (copy from template):
+   ```bash
+   cp config.js.template config.js
    ```
-   SUPABASE_URL=your_project_url_here
-   SUPABASE_ANON_KEY=your_anon_public_key_here
+   Then edit `config.js` to add your Supabase URL and anon key:
+   ```javascript
+   const SUPABASE_CONFIG = {
+       SUPABASE_URL: 'your_project_url_here',
+       SUPABASE_ANON_KEY: 'your_anon_public_key_here'
+   };
    ```
+   **Important:** Never commit `config.js` to GitHub! It's already in `.gitignore` (if not, add it).
 
 ### 3. Set up Stripe (for payments)
 1. Create a Stripe account at [stripe.com](https://stripe.com)
 2. Get your **test publishable key** and **test secret key** from Developers → API keys
-3. Add to your `.env` file:
-   ```
-   STRIPE_PUBLISHABLE_KEY=your_test_publishable_key_here
-   STRIPE_SECRET_KEY=your_test_secret_key_here
+3. We'll add these to `config.js` later when implementing payments:
+   ```javascript
+   const SUPABASE_CONFIG = {
+       SUPABASE_URL: 'your_project_url_here',
+       SUPABASE_ANON_KEY: 'your_anon_public_key_here',
+       STRIPE_PUBLISHABLE_KEY: 'your_test_publishable_key_here',
+       STRIPE_SECRET_KEY: 'your_test_secret_key_here'
+   };
    ```
 
 ### 4. Run locally
-For frontend-only testing (mock data):
+For frontend-only testing (mock data if config.js not found):
 - Simply open `index.html` in a browser
 
 For full functionality with Supabase:
 - We'll need to serve the files via a local server (to avoid CORS issues) and connect to Supabase
 - Example: `python -m http.server 8000` then visit `http://localhost:8000`
-- We'll update `script.js` to read from `.env` and connect to Supabase in later steps
+- The app will automatically load your config from `config.js` and connect to Supabase
 
 ### 5. Deploy
 1. Push to GitHub (already done)
 2. Enable GitHub Pages on the `main` branch (Settings → Pages)
 3. Supabase backend will work automatically with the deployed frontend
+   - Make sure `config.js` is **not** deployed (it should be in `.gitignore`)
 
 ## Next Steps
 
-1. [ ] Update `script.js` to fetch products from Supabase instead of mock data
-2. [ ] Implement Supabase auth (email/password sign up/login)
-3. [ ] Add cart persistence (localStorage or Supabase)
-4. [ ] Implement delivery cost calculation using OpenStreetMap Nominatim
-5. [ ] Integrate Stripe test mode for payments
-6. [ ] Show order receipt after successful payment
-7. [ ] Create basic admin interface for adding products (protected route)
-8. [ ] Add responsive improvements and UI polish
-9. [ ] Add order history page for users
-10. [ ] Deploy to GitHub Pages
+1. [ ] Implement Supabase auth (email/password sign up/login)
+2. [ ] Add cart persistence (localStorage or Supabase)
+3. [ ] Implement delivery cost calculation using OpenStreetMap Nominatim
+4. [ ] Integrate Stripe test mode for payments
+5. [ ] Show order receipt after successful payment
+6. [ ] Create basic admin interface for adding products (protected route)
+7. [ ] Add responsive improvements and UI polish
+8. [ ] Add order history page for users
+9. [ ] Deploy to GitHub Pages
 
 ## Development Log
 
@@ -97,3 +109,6 @@ For full functionality with Supabase:
   - Mock product data and cart functionality
   - Basic styling and responsive design
 - **2026-06-13**: Added Supabase schema with tables for categories, products, orders, order_items, and profiles
+- **2026-06-13**: Integrated Supabase JS client and updated script.js to fetch products from Supabase
+  - Added config.js.template for environment variables
+  - App falls back to mock data if config.js not found

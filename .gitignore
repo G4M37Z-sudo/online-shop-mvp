@@ -1,0 +1,10 @@
+# Environment variables
+config.js
+.env
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+Thumbs.db

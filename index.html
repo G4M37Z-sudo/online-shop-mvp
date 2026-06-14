@@ -4,46 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Shop MVP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>🛒 Online Shop MVP</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#catalog">Catalog</a></li>
-                <li><a href="#cart">Cart</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <div class="logo">
+                <h1>ShopMart</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#catalog">Catalog</a></li>
+                    <li><a href="#cart">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
-        <section id="home">
-            <h2>Welcome to Our Store</h2>
-            <p>Browse our categories and order items online.</p>
-        </section>
-        <section id="catalog">
-            <h2>Product Catalog</h2>
-            <div id="product-list" class="grid">
-                <!-- Products will be injected here by JS -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Welcome to ShopMart</h2>
+                <p>Your premium online shopping destination</p>
+                <a href="#catalog" class="btn-primary">Explore Products</a>
             </div>
         </section>
-        <section id="cart">
-            <h2>Shopping Cart</h2>
-            <div id="cart-items">
-                <!-- Cart items will be injected here -->
+        <section id="catalog" class="catalog-section">
+            <div class="container">
+                <div class="catalog-header">
+                    <h2>Product Catalog</h2>
+                    <div class="filters">
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                            <!-- Categories will be populated here -->
+                        </select>
+                        <select id="sort-options">
+                            <option value="default">Default</option>
+                            <option value="price-low-high">Price: Low to High</option>
+                            <option value="price-high-low">Price: High to Low</option>
+                            <option value="name-az">Name: A to Z</option>
+                            <option value="name-za">Name: Z to A</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="product-list" class="product-grid">
+                    <!-- Products will be injected here by JS -->
+                </div>
             </div>
-            <div id="cart-summary">
-                <p>Subtotal: <span id="subtotal">$0.00</span></p>
-                <p>Delivery: <span id="delivery-cost">$0.00</span></p>
-                <p>Total: <span id="total">$0.00</span></p>
-                <button id="checkout-btn">Proceed to Checkout</button>
+        </section>
+        <section id="cart" class="cart-section">
+            <div class="container">
+                <h2>Shopping Cart</h2>
+                <div id="cart-items">
+                    <!-- Cart items will be injected here -->
+                </div>
+                <div id="cart-summary">
+                    <p>Subtotal: <span id="subtotal">$0.00</span></p>
+                    <p>Delivery: <span id="delivery-cost">$0.00</span></p>
+                    <p>Total: <span id="total">$0.00</span></p>
+                    <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2026 Online Shop MVP</p>
+        <div class="container">
+            <p>&copy; 2026 ShopMart. All rights reserved.</p>
+        </div>
     </footer>
+    <!-- Supabase JS client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
 </html>
